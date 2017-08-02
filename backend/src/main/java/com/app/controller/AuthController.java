@@ -3,6 +3,7 @@ package com.app.controller;
 import com.app.entity.Role;
 import com.app.entity.User;
 import com.app.exception.InvalidPasswordException;
+import com.app.exception.UserAlreadySignedInException;
 import com.app.exception.UserNotFoundException;
 import com.app.security.auth.JwtAuthenticationRequest;
 import com.app.security.auth.JwtAuthenticationResponse;
@@ -12,6 +13,7 @@ import com.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -102,7 +104,12 @@ public class AuthController extends BaseController {
         String password = authenticationRequest.getPassword();
         LOG.info("[POST] CREATING TOKEN FOR User " + name);
         Role role  = new Role(1L, "USER");
-        userService.save(new User(0L, name, email, password, role));
+        try {
+            userService.save(new User(0L, name, email, password, role));
+        }catch (DataIntegrityViolationException exception){
+            LOG.error(exception.getMessage());
+            throw new UserAlreadySignedInException();
+        }
         JwtUser userDetails;
 
         try {

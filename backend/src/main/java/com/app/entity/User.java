@@ -20,7 +20,7 @@ public class User implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @Email

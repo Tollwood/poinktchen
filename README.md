@@ -13,16 +13,18 @@
 3. Run `psql --version` to verify its in the path
 
 ### install 
-1. install lombok Plugin
+1. install lombok Plugin for intellij
 2. Enable Annotation Processing in settings
 
 ## Build and Run the application
-
+### Frontend build
 1. Run `npm install --prefix ./frontend` to install front-end dependencies.
 2. Run `npm run build --prefix ./frontend` to build angular application.
-3. Run `./init_db` to create database, dbuser and dump default schema.
-4. Run `gradle -p ./backend build` to build a spring boot application.
-5. Run `gradle -p ./backend bootRun` or `java -jar backend/build/libs/app-name-[version].jar` to start spring boot application on embedded server. By default server will be running on port `8080`.
+
+### backend build
+1. Run `./init_db` to create database, dbuser and dump default schema.
+2. Run `gradle -p ./backend build` to build a spring boot application.
+3. Run `gradle -p ./backend bootRun` or `java -jar backend/build/libs/app-name-[version].jar` to start spring boot application on embedded server. By default server will be running on port `8080`.
 
 > `npm start --prefix ./frontend` to start front-end server for development.
 
