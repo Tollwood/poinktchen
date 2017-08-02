@@ -9,19 +9,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-//many to many relationship between cardsTemplate and User
-@Entity(name = "cards")
+@Entity(name = "cardtemplates")
 @Data
 @NoArgsConstructor
-public class Card {
+public class CardTemplate {
 
     @NonNull
-    //nullable for int? default to 0????
+    @Id
+    @GeneratedValue
+    private String id;
+
+    @NonNull
     @Column(nullable = false)
-    private int currentPoints;
+    private int maxPoints;
 
-    private User user;
+    private String title;
 
-    private CardTemplate cardTemplate;
+    private String description;
+
 
 }
