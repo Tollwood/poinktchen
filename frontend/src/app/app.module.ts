@@ -16,7 +16,7 @@ import { AuthService } from './services/auth/auth.service';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path: "**/*", component: AppComponent},
+      {path: '**/*', component: AppComponent},
     ])
   ],
   providers: [

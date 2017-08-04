@@ -10,10 +10,10 @@ describe('AuthService', () => {
 
   const user = JSON.stringify({
     id: 1,
-    sub: "user",
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
-      + ".eyJpZCI6IjEiLCJuYW1lIjoidXNlciJ9"
-      + ".PUHflJtYA6kdUev8BwbC_a1GBi3SCCWxQstZQGBYY7g"
+    sub: 'user',
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
+      + '.eyJpZCI6IjEiLCJuYW1lIjoidXNlciJ9'
+      + '.PUHflJtYA6kdUev8BwbC_a1GBi3SCCWxQstZQGBYY7g'
   });
 
   beforeEach(() => {
@@ -81,7 +81,7 @@ describe('AuthService', () => {
     const username = authService.getUsername();
     expect(username).toBeDefined();
     expect(username).not.toBeNull();
-    expect(username).toEqual("user");
+    expect(username).toEqual('user');
   }));
 
   it('should return undefined if username does not exists',

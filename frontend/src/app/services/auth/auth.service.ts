@@ -20,14 +20,14 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class AuthService {
 
+  public static readonly SIGNUP_URL = environment.apiUrl + '/api/auth/signup';
+  public static readonly SIGNIN_URL = environment.apiUrl + '/api/auth/signin';
+  public static readonly REFRESH_TOKEN_URL = environment.apiUrl + '/api/auth/token/refresh';
+
   private token: string;
   private username: string;
   private userId: number;
-  
-  public static readonly SIGNUP_URL = environment.apiUrl + "/api/auth/signup";
-  public static readonly SIGNIN_URL = environment.apiUrl + "/api/auth/signin";
-  public static readonly REFRESH_TOKEN_URL = environment.apiUrl + "/api/auth/token/refresh";
-  
+
   constructor(private http: Http) {
     this.refreshUserData();
   }
@@ -37,7 +37,7 @@ export class AuthService {
   */
   public refreshUserData(): void {
     const user = sessionStorage.getItem('user');
-    if(user) {
+    if (user) {
       this.saveUserDetails(JSON.parse(user));
     }
   }
@@ -144,10 +144,10 @@ export class AuthService {
   private saveToken(res: Response): void {
     const response = res.json() && res.json().token;
     if (response) {
-      const token = response;
-      let claims = this.getTokenClaims(token);
-      claims.token = token;
-      sessionStorage.setItem('user', JSON.stringify(claims));
+            const token = response;
+            let claims = this.getTokenClaims(token);
+            claims.token = token;
+            sessionStorage.setItem('user', JSON.stringify(claims));
     } else {
       throw Error(res.json());
     }
@@ -170,9 +170,9 @@ export class AuthService {
   // Generates Headers
   private generateOptions(): RequestOptions {
     let headers = new Headers();
-    headers.append("Content-Type", 'application/json');
-    headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Access-Control-Allow-Headers", "Origin, Authorization, Content-Type");
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Headers', 'Origin, Authorization, Content-Type');
     return new RequestOptions({ headers: headers });
   }
 

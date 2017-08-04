@@ -22,7 +22,7 @@
 2. Run `npm run build --prefix ./frontend` to build angular application.
 
 ### backend build
-1. Run `./init_db` to create database, dbuser and dump default schema.
+1. Run `.sh ./scripts/init_db.sh` to create database, dbuser and dump default schema.
 2. Run `gradle -p ./backend build` to build a spring boot application.
 3. Run `gradle -p ./backend bootRun` or `java -jar backend/build/libs/app-name-[version].jar` to start spring boot application on embedded server. By default server will be running on port `8080`.
 

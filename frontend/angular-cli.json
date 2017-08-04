@@ -1,6 +1,6 @@
 {
   "project": {
-    "name": "app-name"
+    "name": "poinktchen"
   },
   "apps": [
     {
@@ -14,7 +14,7 @@
       "main": "main.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
-      "prefix": "app-name",
+      "prefix": "poinktchen",
       "mobile": false,
       "styles": [
         "styles.css"

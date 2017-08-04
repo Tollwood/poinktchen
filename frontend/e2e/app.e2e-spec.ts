@@ -11,5 +11,4 @@ describe('app-name App', function() {
     page.navigateTo();
     expect(page.getContainer()).toBeDefined();
   });
-  
 });
