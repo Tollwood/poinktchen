@@ -4,24 +4,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.util.Set;
 
-//many to many relationship between cardsTemplate and User
-@Entity(name = "cards")
+@Entity(name = "Card")
+@Table(name = "cards")
 @Data
 @NoArgsConstructor
 public class Card {
 
     @NonNull
-    //nullable for int? default to 0????
+    @Min(0)
     @Column(nullable = false)
     private int currentPoints;
 
-    private User user;
+    @OneToMany()
+    @Column(nullable = false)
+    private Set<CardTemplate> cardTemplates;
 
-    private CardTemplate cardTemplate;
+    private User user;
 
 }

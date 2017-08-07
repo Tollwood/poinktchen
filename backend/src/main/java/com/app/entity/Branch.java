@@ -4,10 +4,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
-@Entity(name = "branches")
+@Entity(name = "Branche")
+@Table(name = "branches")
 @Data
 @NoArgsConstructor
 public class Branch {
@@ -18,20 +21,17 @@ public class Branch {
 
     @NotNull
     @Column(nullable = false)
-    //max length 50
+    @Size(max = 50)
     private String name;
 
-    //maxLenght 200
-    // optional
+    @Size(max = 200)
     private String description;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "contactdata_id")
     private Contactdata contactdata;
 
-    @OneToOne
-    @JoinColumn(name = "card_id")
-    //0..n
-    private List<CardTemplate> cardTemplates;
-
+    @ManyToOne()
+    @JoinColumn(name = "compmany_id")
+    private Company company;
 }

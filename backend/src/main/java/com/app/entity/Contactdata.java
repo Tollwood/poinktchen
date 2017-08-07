@@ -5,20 +5,23 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity(name = "contactdata")
+@Entity(name = "Contactdata")
+@Table(name = "contactdata")
 @Data
 @NoArgsConstructor
 public class Contactdata {
 
     @NonNull
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
+    @NonNull
+    @OneToOne()
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
 
     @NonNull
     @Column(nullable = false)
@@ -26,16 +29,13 @@ public class Contactdata {
 
     @NonNull
     @Email
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
-
 
     @NonNull
     @Column(nullable = false)
     //make own object incl. long and lat
     private String address;
-
-
 
     private String homepage;
 

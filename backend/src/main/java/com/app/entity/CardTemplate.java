@@ -4,12 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity(name = "cardtemplates")
+@Entity(name = "Cardtemplate")
+@Table(name = "card_templates")
 @Data
 @NoArgsConstructor
 public class CardTemplate {
@@ -26,6 +24,9 @@ public class CardTemplate {
     private String title;
 
     private String description;
+
+
+    private Branch branch;
 
 
 }

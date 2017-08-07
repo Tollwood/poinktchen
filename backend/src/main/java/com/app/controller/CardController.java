@@ -17,7 +17,6 @@ public class CardController {
         return null;
     }
 
-
     public Card addPoint(Long userId, Long cardTemplateId){
         return null;
     }

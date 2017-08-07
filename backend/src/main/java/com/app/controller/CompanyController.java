@@ -1,11 +1,11 @@
 package com.app.controller;
 
-import com.app.entity.Branch;
-import com.app.entity.Card;
 import com.app.entity.Company;
-import com.app.service.ProviderService;
+import com.app.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -16,58 +16,37 @@ import java.util.List;
 public class CompanyController {
 
 
-    private ProviderService providerService;
+    private CompanyService companyService;
 
     @Autowired
-    public void setProviderService(ProviderService providerService) {
-        this.providerService = providerService;
+    public void setCompanyService(CompanyService companyService) {
+        this.companyService = companyService;
     }
 
-    public void addCompany(){
-        providerService.save();
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public void addCompany(Company company){
+        companyService.save(company);
     }
 
-    public void updateCompany(){
-        providerService.save();
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void updateCompany(Company company){
+        companyService.save(company);
     }
 
+    @RequestMapping("/delete")
     public void deleteCompany(Company company){
-
+        companyService.delete(company);
     }
 
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<Company> getAllCompanies(){
-        return new ArrayList<>();
+        return companyService.findAll();
     }
 
-    public List<Company> findCompanyByName(String name){
-        return new ArrayList<>();
+    @RequestMapping(value = "/searchByName", method = RequestMethod.GET, params = "name")
+    public Company findCompanyByName(String name){
+        return companyService.findByName(name);
     }
 
-    public Company addBranch(Long companyId, Branch branch){
-        return null;
-    }
 
-    public Branch updateBranch(Branch branch){
-        return null;
-    }
-
-    public void deleteBranch(Long companyId, Long branchId){
-
-    }
-
-    public Card addCard(Long companyId, Card card){
-        return null;
-    }
-
-    public Card updateCard(Card card){
-        return null;
-    }
-
-    public void deleteCard(Long companyId, Long CardId){
-
-    }
-
-    public List<Card> getCardsByBranch(Long branchId){
-        return new ArrayList<>();
-    }
 }

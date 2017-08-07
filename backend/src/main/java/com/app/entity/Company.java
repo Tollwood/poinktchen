@@ -5,9 +5,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-@Entity(name = "providers")
+@Entity(name = "Company")
+@Table(name = "companies")
 @Data
 @NoArgsConstructor
 public class Company {
@@ -22,7 +25,7 @@ public class Company {
 
     private String description;
 
-    // 1..n -> at least one Branch
-    private List<Branch> branches;
+    @OneToMany(mappedBy = "companies")
+    private List<Branch> branches = new ArrayList<>();
 
 }
