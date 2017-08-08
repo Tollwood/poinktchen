@@ -35,7 +35,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     store = {};
-    spyOn(sessionStorage, 'getItem').and.callFake(key => {
+    spyOn(localStorage, 'getItem').and.callFake(key => {
       return store[key];
     });
   });

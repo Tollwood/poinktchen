@@ -1,0 +1,12 @@
+<div class="col-md-6 col-md-offset-3">
+    <h1>Hi {{currentUser.name}}!</h1>
+    <p>Have fun collecting Poinktchen!</p>
+
+    <div *ngFor="let user of users">
+        <div >
+            <h4>{{user.name}}</h4>
+        </div>
+    </div>
+
+    <p><a [routerLink]="['/login']">Logout</a></p>
+</div>

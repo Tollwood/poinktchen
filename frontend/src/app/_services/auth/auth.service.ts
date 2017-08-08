@@ -12,10 +12,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { environment } from '../../../environments/environment';
+import {UserSignUp} from '../../_models/userSignUp';
 
 /**
 * AuthService uses JSON-Web-Token authorization strategy.
-* Fetched token and user details are stored in sessionStorage.
+* Fetched token and user details are stored in localStorage.
 */
 @Injectable()
 export class AuthService {
@@ -33,10 +34,10 @@ export class AuthService {
   }
 
   /**
-  * Refreshes userId, username and token from sessionStorage
+  * Refreshes userId, username and token from localStorage
   */
   public refreshUserData(): void {
-    const user = sessionStorage.getItem('user');
+    const user = localStorage.getItem('user');
     if (user) {
       this.saveUserDetails(JSON.parse(user));
     }
@@ -48,18 +49,12 @@ export class AuthService {
   * @param email
   * @param password
   */
-  public signUp(username: string, email: string, password: string): Observable<{}> {
+  public signUp(user: UserSignUp): Observable<{}> {
 
-    const requestParam = {
-      email: email,
-      username: username,
-      password: password
-    };
-
-    return this.http.post(AuthService.SIGNUP_URL, requestParam, this.generateOptions())
+    return this.http.post(AuthService.SIGNUP_URL, user, this.generateOptions())
       .map((res: Response) => {
         this.saveToken(res);
-        this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
+        this.saveUserDetails(JSON.parse(localStorage.getItem('user')));
       }).catch(err => {
         throw Error(err.json().message);
       });
@@ -80,17 +75,17 @@ export class AuthService {
     return this.http.post(AuthService.SIGNIN_URL, requestParam, this.generateOptions())
       .map((res: Response) => {
         this.saveToken(res);
-        this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
+        this.saveUserDetails(JSON.parse(localStorage.getItem('user')));
       }).catch(err => {
         throw Error(err.json().message);
       });
   }
 
   /**
-  * Removes token and user details from sessionStorage and service's variables
+  * Removes token and user details from localStorage and service's variables
   */
   public logout(): void {
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
     this.token = null;
     this.username = null;
     this.userId = null;
@@ -113,7 +108,7 @@ export class AuthService {
 
   /**
   * Checks if user is authorized
-  * @return true is user authorized (there is token in sessionStorage) else false
+  * @return true is user authorized (there is token in localStorage) else false
   */
   public isAuthorized(): boolean {
     return Boolean(this.token);
@@ -140,14 +135,14 @@ export class AuthService {
     return this.token;
   }
 
-  // Saves user details with token into sessionStorage as user item
+  // Saves user details with token into localStorage as user item
   private saveToken(res: Response): void {
     const response = res.json() && res.json().token;
     if (response) {
             const token = response;
             let claims = this.getTokenClaims(token);
             claims.token = token;
-            sessionStorage.setItem('user', JSON.stringify(claims));
+            localStorage.setItem('user', JSON.stringify(claims));
     } else {
       throw Error(res.json());
     }
