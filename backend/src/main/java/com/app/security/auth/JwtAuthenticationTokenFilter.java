@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author saka7
  * Checks JWT validity
  */
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
@@ -26,10 +25,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Value("${auth.header}")
     private String tokenHeader;
 
-    /**
-     * Injects UserDetailsService instance
-     * @param userDetailsService to inject
-     */
     @Autowired
     public void setUserDetailsService(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;

@@ -10,11 +10,6 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class RestConfiguration {
 
-    /**
-     * Adds Cross Origin Resource Sharing filter
-     * During development Frontend und Backend might not be on the same host. Enable CORS to allow request
-     * @return CorsFilter
-     */
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -22,11 +17,11 @@ public class RestConfiguration {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("GET");
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("DELETE");
-        config.addAllowedMethod("PATCH");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

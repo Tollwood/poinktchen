@@ -30,9 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * AuthController provides signup, signin and token refresh methods
- */
+
 @RestController
 public class AuthController extends BaseController {
 
@@ -48,39 +46,11 @@ public class AuthController extends BaseController {
     private UserDetailsService userDetailsService;
     private UserService userService;
 
-    /**
-     * Injects AuthenticationManager instance
-     * @param authenticationManager to inject
-     */
     @Autowired
-    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+    AuthController(final AuthenticationManager authenticationManager, final JwtUtil jwtUtil, final UserDetailsService userDetailsService, final UserService userService){
         this.authenticationManager = authenticationManager;
-    }
-
-    /**
-     * Injects JwtUtil instance
-     * @param jwtUtil to inject
-     */
-    @Autowired
-    public void setJwtTokenUtil(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
-    }
-
-    /**
-     * Injects UserDetailsService instance
-     * @param userDetailsService to inject
-     */
-    @Autowired
-    public void setUserDetailsService(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
-    }
-
-    /**
-     * Injects UserService instance
-     * @param userService to inject
-     */
-    @Autowired
-    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
