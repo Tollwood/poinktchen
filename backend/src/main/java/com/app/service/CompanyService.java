@@ -11,6 +11,5 @@ public interface CompanyService {
     void delete(Company company);
     List<Company> findAll();
     Company findByName(String name);
-
     Company findById(long id);
 }

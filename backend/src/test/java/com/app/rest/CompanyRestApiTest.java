@@ -43,7 +43,8 @@ public class CompanyRestApiTest {
     @Test
     public void createCompanies() throws JSONException, IOException {
         headers.setContentType(MediaType.APPLICATION_JSON);
-        final Company company = new Company("Company");
+        final Company company = new Company();
+        company.setName("Company");
         final String companyAsJson = new ObjectMapper().writeValueAsString(company);
         HttpEntity<String> entity = new HttpEntity<>(companyAsJson,headers);
         ResponseEntity<String> response = restTemplate.exchange(createUrlWithPort("/api/companies"),

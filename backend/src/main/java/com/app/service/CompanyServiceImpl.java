@@ -10,9 +10,7 @@ import java.util.List;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    @Autowired
     private CompanyRepository companyRepository;
-
 
     @Override
     public Company save(Company company) {
@@ -22,10 +20,12 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Company update(long id, Company company) {
         Company currentCompany = findById(id);
-        currentCompany.setName(company.getName());
-        currentCompany.setDescription(company.getDescription());
-        companyRepository.save(company);
-        return  currentCompany;
+        if(currentCompany != null) {
+            currentCompany.setName(company.getName());
+            currentCompany.setDescription(company.getDescription());
+            companyRepository.save(company);
+        }  return currentCompany;
+
     }
 
     @Override
@@ -46,5 +46,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Company findById(long id) {
         return companyRepository.findOne(id);
+    }
+
+    @Autowired
+    public void setCompanyRepository(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
     }
 }
