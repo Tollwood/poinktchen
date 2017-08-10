@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class CompanyController {
+public class CompanyController extends BaseController{
 
 
     private CompanyService companyService;
@@ -20,32 +20,33 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/api/companies", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Company createCompany(@RequestBody Company company){
+    public Company create(@RequestBody Company company){
         return companyService.save(company);
     }
 
     @RequestMapping(value = "/api/companies/{id}", method = RequestMethod.PUT)
-    public Company updateCompany(@PathVariable("id") long id, @RequestBody Company company) {
+    public Company update(@PathVariable("id") long id, @RequestBody Company company) {
         return companyService.update(id, company);
     }
 
     @RequestMapping(value = "/api/companies/{id}", method = RequestMethod.DELETE)
-    public void deleteCompany(Company company){
+    public void delete(Company company){
         companyService.delete(company);
     }
 
-    @RequestMapping("/api/companies")
-    public List<Company> getAllCompanies(){
+    @RequestMapping(value= "/api/companies",  method = RequestMethod.GET)
+    public List<Company> getAll(){
         return companyService.findAll();
     }
+ 	
 
-    @RequestMapping("/api/companies/{id}")
+	@RequestMapping("/api/companies/{id}")
     public Company getCompany(@PathVariable("id") long id) {
         return companyService.findById(id);
     }
 
-    @RequestMapping(value = "/api/companies", method = RequestMethod.GET, params = "name")
-    public Company findCompanyByName(String name){
+    @RequestMapping(value = "/searchByName", method = RequestMethod.GET, params = "name")
+    public Company findByName(String name){
         return companyService.findByName(name);
     }
 

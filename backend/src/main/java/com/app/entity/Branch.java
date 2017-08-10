@@ -5,13 +5,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import javax.validation.constraints.Size;
 
-@Entity(name = "Company")
-@Table(name = "companies")
+@Entity(name = "Branch")
+@Table(name = "branches")
 @Data
 @NoArgsConstructor
-public class Company implements Serializable {
+public class Branch {
 
     @Id
     @GeneratedValue
@@ -19,8 +19,9 @@ public class Company implements Serializable {
 
     @NotNull
     @Column(nullable = false)
+    @Size(max = 50)
     private String name;
 
-    private String description;;
-
+    @Size(max = 200)
+    private String description;
 }

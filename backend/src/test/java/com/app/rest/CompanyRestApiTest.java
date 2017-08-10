@@ -46,7 +46,8 @@ public class CompanyRestApiTest {
     public void createCompany() throws JSONException, IOException {
         //given
         headers.setContentType(MediaType.APPLICATION_JSON);
-        final Company company = new Company("Company");
+        final Company company = new Company();
+        company.setName("Company");
         final String companyAsJson = new ObjectMapper().writeValueAsString(company);
         HttpEntity<String> entity = new HttpEntity<>(companyAsJson,headers);
 
