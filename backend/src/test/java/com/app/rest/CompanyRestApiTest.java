@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNull;
 
 @SqlGroup({
         @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {
-                "classpath:data/hsql/init-company.sql"
+                "classpath:data/hsql/init-companies.sql"
         }),
         @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:data/hsql/clear-postgres.sql")
 })
@@ -66,7 +66,7 @@ public class CompanyRestApiTest {
     @Test
     public void getCompany() throws JSONException, IOException {
         //given
-        long id = 1001;
+        long id = 123;
         //when
         final Company company = getCompanyById(id);
         //then
@@ -74,13 +74,13 @@ public class CompanyRestApiTest {
         assertEquals(Long.valueOf(id), company.getId());
     }
 
-    //@Test
+    @Test
     public void updateCompany() throws JSONException, IOException {
         //given
-        final long id = 1001;
+        final long id = 123;
         final String someOtherDescription = "someOtherDescription";
         final Company company = getCompanyById(id);
-
+        headers.setContentType(MediaType.APPLICATION_JSON);
         //when
         company.setDescription(someOtherDescription);
         final String companyAsJson = new ObjectMapper().writeValueAsString(company);
@@ -99,7 +99,7 @@ public class CompanyRestApiTest {
     @Test
     public void deleteCompany() throws JSONException, IOException {
         //given
-        final long id = 1001;
+        final long id = 123;
 
         //when
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
@@ -122,7 +122,7 @@ public class CompanyRestApiTest {
         //then
         assertEquals(200,response.getStatusCodeValue() );
         List<Company> companies = new ObjectMapper().readValue(response.getBody(), new TypeReference<List<Company>>(){});
-        assertEquals(1, companies.size());
+        assertEquals(2, companies.size());
     }
 
     private Company getCompanyById(long id) throws IOException {
@@ -131,6 +131,7 @@ public class CompanyRestApiTest {
     }
 
     private ResponseEntity<String> getCompanyByIdResponse(long id) {
+        headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(null,headers);
         return restTemplate.exchange(createUrlWithPort("/api/companies/"+ id),
                 HttpMethod.GET, entity, String.class);
