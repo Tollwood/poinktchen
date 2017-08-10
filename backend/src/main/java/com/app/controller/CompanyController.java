@@ -29,7 +29,7 @@ public class CompanyController {
         return companyService.update(id, company);
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/api/companies/{id}", method = RequestMethod.DELETE)
     public void deleteCompany(Company company){
         companyService.delete(company);
     }
@@ -37,6 +37,11 @@ public class CompanyController {
     @RequestMapping("/api/companies")
     public List<Company> getAllCompanies(){
         return companyService.findAll();
+    }
+
+    @RequestMapping("/api/companies/{id}")
+    public Company getCompany(@PathVariable("id") long id) {
+        return companyService.findById(id);
     }
 
     @RequestMapping(value = "/api/companies", method = RequestMethod.GET, params = "name")
