@@ -72,8 +72,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
         httpSecurity
-                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
-
+                .csrf().disable()
+                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests().anyRequest().permitAll();
         httpSecurity.headers().cacheControl();
     }
 }

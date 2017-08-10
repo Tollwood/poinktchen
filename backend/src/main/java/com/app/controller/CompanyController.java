@@ -3,6 +3,7 @@ package com.app.controller;
 import com.app.entity.Company;
 import com.app.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +19,12 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
-    @RequestMapping(value = "/api/company", method = RequestMethod.POST)
-    public void createCompany(@RequestBody Company company){
-        companyService.save(company);
+    @RequestMapping(value = "/api/companies", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Company createCompany(@RequestBody Company company){
+        return companyService.save(company);
     }
 
-    @RequestMapping(value = "/api/company/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/companies/{id}", method = RequestMethod.PUT)
     public Company updateCompany(@PathVariable("id") long id, @RequestBody Company company) {
         return companyService.update(id, company);
     }
@@ -33,12 +34,12 @@ public class CompanyController {
         companyService.delete(company);
     }
 
-    @RequestMapping("/api/company")
+    @RequestMapping("/api/companies")
     public List<Company> getAllCompanies(){
         return companyService.findAll();
     }
 
-    @RequestMapping(value = "/searchByName", method = RequestMethod.GET, params = "name")
+    @RequestMapping(value = "/api/companies", method = RequestMethod.GET, params = "name")
     public Company findCompanyByName(String name){
         return companyService.findByName(name);
     }
