@@ -1,1 +1,0 @@
-TRUNCATE companies, roles, users;

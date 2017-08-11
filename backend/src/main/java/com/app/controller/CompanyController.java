@@ -19,7 +19,7 @@ public class CompanyController extends BaseController{
         this.companyService = companyService;
     }
 
-    @RequestMapping(value = "/api/companies", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/companies", method = RequestMethod.POST)
     public Company create(@RequestBody Company company){
         return companyService.save(company);
     }
@@ -38,7 +38,6 @@ public class CompanyController extends BaseController{
     public List<Company> getAll(){
         return companyService.findAll();
     }
- 	
 
 	@RequestMapping("/api/companies/{id}")
     public Company getCompany(@PathVariable("id") long id) {

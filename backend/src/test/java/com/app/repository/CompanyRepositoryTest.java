@@ -2,13 +2,11 @@ package com.app.repository;
 
 
 import com.app.entity.Company;
-import com.app.entity.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
-import static com.app.util.DummyDataGenerator.getUsers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
