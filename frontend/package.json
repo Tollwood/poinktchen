@@ -6,7 +6,7 @@
   "scripts": {
     "build": "ng build --prod --output-hashing none",
     "build:sw": "npm run build && npm run precache",
-    "build:prod": "npm run build:sw && npm run copy",
+    "build:prod": "npm run test:prod && npm run build:sw && npm run copy",
     "start": "ng serve",
     "start:prod": "npm run precache && ng serve --prod",
     "lint": "tslint \"src/**/*.ts\"",
