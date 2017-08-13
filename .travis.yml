@@ -1,0 +1,12 @@
+dist: trusty
+language: java
+jdk:
+    - oraclejdk8
+node_js:
+  - "6.2.0"
+addons:
+  chrome: stable
+before_install:
+  - npm i -g npm@3.8.9
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost:9876 &
+script: cd ./frontend && npm install && npm run build:prod && cd ../backend && gradle build
